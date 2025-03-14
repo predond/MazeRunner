@@ -1,0 +1,36 @@
+﻿  Game.cpp
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(14,42): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(14,31): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(59,50): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(59,50): warning C4244:         with
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(59,50): warning C4244:         [
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(59,50): warning C4244:             T=unsigned int
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(59,50): warning C4244:         ]
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(59,50): warning C4244:         and
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(59,50): warning C4244:         [
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(59,50): warning C4244:             T=float
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(59,50): warning C4244:         ]
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(75,37): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(75,26): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(178,124): warning C4305: "-=": obcięcie z "double" do "T"
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(178,124): warning C4305:         with
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(178,124): warning C4305:         [
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(178,124): warning C4305:             T=float
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(178,124): warning C4305:         ]
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(179,126): warning C4305: "+=": obcięcie z "double" do "T"
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(179,126): warning C4305:         with
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(179,126): warning C4305:         [
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(179,126): warning C4305:             T=float
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(179,126): warning C4305:         ]
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(180,126): warning C4305: "-=": obcięcie z "double" do "T"
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(180,126): warning C4305:         with
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(180,126): warning C4305:         [
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(180,126): warning C4305:             T=float
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(180,126): warning C4305:         ]
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(181,127): warning C4305: "+=": obcięcie z "double" do "T"
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(181,127): warning C4305:         with
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(181,127): warning C4305:         [
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(181,127): warning C4305:             T=float
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(181,127): warning C4305:         ]
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(213,17): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
+  MazeRunner.vcxproj -> C:\Users\dawid\source\repos\MazeRunner\x64\Debug\MazeRunner.exe

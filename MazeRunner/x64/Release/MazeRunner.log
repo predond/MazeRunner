@@ -1,0 +1,96 @@
+﻿  Game.cpp
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(21,42): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(21,31): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(71,105): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(71,62): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(74,50): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(74,50): warning C4244:         with
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(74,50): warning C4244:         [
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(74,50): warning C4244:             T=unsigned int
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(74,50): warning C4244:         ]
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(74,50): warning C4244:         and
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(74,50): warning C4244:         [
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(74,50): warning C4244:             T=float
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(74,50): warning C4244:         ]
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(90,37): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(90,26): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(258,17): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(313,46): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(313,46): warning C4244:         with
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(313,46): warning C4244:         [
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(313,46): warning C4244:             T=float
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(313,46): warning C4244:         ]
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(312,46): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(312,46): warning C4244:         with
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(312,46): warning C4244:         [
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(312,46): warning C4244:             T=float
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(312,46): warning C4244:         ]
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(321,24): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(467,105): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Game.cpp(467,62): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244: "inicjowanie": konwersja z "T" do "_Ty1", możliwa utrata danych
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244:             T=float
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244:         ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244:         and
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244:             _Ty1=int
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16): warning C4244:         ]
+  (kompilowanie pliku źródłowego „Game.cpp”)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,16):
+      kontekst tworzenia wystąpienia szablonu (najpierw najstarszy) to
+          C:\Users\dawid\source\repos\MazeRunner\Game.cpp(319,27):
+          zobacz odwołanie do kompilowanego tworzenia wystąpienia „std::pair<int,int>::pair<T&,T&,0>(_Other1,_Other2) noexcept” funkcji szablon
+          with
+          [
+              T=float,
+              _Other1=float &,
+              _Other2=float &
+          ]
+              C:\Users\dawid\source\repos\MazeRunner\Game.cpp(319,5):
+              zobacz pierwsze odwołanie do elementu „std::pair<int,int>::pair” w „Game::DrawStepTrail”
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,54): warning C4244: "inicjowanie": konwersja z "T" do "_Ty2", możliwa utrata danych
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,54): warning C4244:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,54): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,54): warning C4244:             T=float
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,54): warning C4244:         ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,54): warning C4244:         and
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,54): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,54): warning C4244:             _Ty2=int
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(250,54): warning C4244:         ]
+  (kompilowanie pliku źródłowego „Game.cpp”)
+  
+  MazeRunner.cpp
+  Player.cpp
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(24,76): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(24,76): warning C4244:         with
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(24,76): warning C4244:         [
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(24,76): warning C4244:             T=unsigned int
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(24,76): warning C4244:         ]
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(24,48): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(24,48): warning C4244:         with
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(24,48): warning C4244:         [
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(24,48): warning C4244:             T=unsigned int
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(24,48): warning C4244:         ]
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(26,95): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(26,56): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(34,85): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(34,85): warning C4244:         with
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(34,85): warning C4244:         [
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(34,85): warning C4244:             T=unsigned int
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(34,85): warning C4244:         ]
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(34,54): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(34,54): warning C4244:         with
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(34,54): warning C4244:         [
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(34,54): warning C4244:             T=unsigned int
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(34,54): warning C4244:         ]
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(160,26): warning C4244: "-=": konwersja z "float" do "sf::Uint8", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(193,41): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\dawid\source\repos\MazeRunner\Player.cpp(194,41): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+  Trwa generowanie kodu
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+  All 1065 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Zakończono generowanie kodu
+  MazeRunner.vcxproj -> C:\Users\dawid\source\repos\MazeRunner\x64\Release\MazeRunner.exe
