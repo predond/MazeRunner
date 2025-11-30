@@ -5,7 +5,7 @@ Menu::Menu(float width, float height) : selectedIndex(0) {
         throw std::runtime_error("Nie udało się załadować czcionki!");
     }
 
-    const std::wstring options[] = { L"Rozpocznij nową grę", L"Zapisz grę", L"Wczytaj grę", L"Wyjdź" };
+    const std::wstring options[] = { L"Rozpocznij nową grę", L"Zapisz grę", L"Wczytaj grę", L"Edytor poziomów", L"Wyjdź"};
     for (int i = 0; i < 4; i++) {
         menu[i].setFont(font);
         menu[i].setFillColor(i == 0 ? sf::Color::Red : sf::Color::White);

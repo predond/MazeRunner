@@ -47,7 +47,27 @@ std::vector<sf::Vector2f> Solver::znajdzSciezkeAStar(std::vector<std::vector<int
 
             WezelSciezki sasiedniWezel;
             sasiedniWezel.pozycja = sasiad;
-            sasiedniWezel.koszt = aktualny.koszt + 1;
+            
+            // koszt bazowy + premiowanie skrzy¿owañ (mniejsze koszty)
+            int sx = static_cast<int>(sasiad.x);
+            int sy = static_cast<int>(sasiad.y);
+            int deg = 0;
+            if (sy >= 0 && sy < (int)maze.size() && sx >= 0 && sx < (int)maze[0].size()) {
+                const int ddx[4] = { 1,-1,0,0 };
+                const int ddy[4] = { 0,0,1,-1 };
+                for (int di = 0; di < 4; ++di) {
+                    int nx = sx + ddx[di], ny = sy + ddy[di];
+                    if (nx >= 0 && nx < (int)maze[0].size() && ny >= 0 && ny < (int)maze.size()) {
+                        if (maze[ny][nx] == 1) deg++;
+                    }
+                }
+            }
+            float degreeBonus = 0.0f;
+            if (deg >= 3) degreeBonus = -0.15f * (deg - 2);
+            float cost = 1.0f + degreeBonus;
+            if (cost < 0.3f) cost = 0.3f;
+            sasiedniWezel.koszt = aktualny.koszt + cost;
+
             sasiedniWezel.heurystyka = obliczHeurystyke(sasiad, meta);
             sasiedniWezel.calkowityKoszt = sasiedniWezel.koszt + sasiedniWezel.heurystyka;
             sasiedniWezel.rodzic = new WezelSciezki(aktualny);

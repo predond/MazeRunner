@@ -28,5 +28,6 @@ private:
     sf::SoundBuffer stepSoundBuffer;  // Bufor dŸwiêku kroków
     sf::Sound stepSound;  // DŸwiêk kroków
     bool isPortalTriggered = false;
+    bool hasKey = false;
     bool checkCollision(const sf::Vector2f& newPosition, const std::vector<std::vector<int>>& maze) const;
 };

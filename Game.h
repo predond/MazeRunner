@@ -84,6 +84,7 @@ private:
 
     void processInput();
     void render();
+    bool checkKeyCollection();
     bool checkWinCondition();
     void resetGame();
 };

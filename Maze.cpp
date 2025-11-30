@@ -3,6 +3,9 @@
 #include <ctime>
 #include <algorithm>
 #include <stack>
+#include "Door.h"
+#include "Key.h"
+#include <random>
 
 Maze::Maze(int width, int height) : width(width), height(height) {
     maze.resize(height, std::vector<int>(width, 0));
@@ -14,7 +17,7 @@ void Maze::generate() {
     generateDFS(1, 1);
 }
 
-    // generatePrim();
+// generatePrim();
 void Maze::generateDFS(int x, int y) {
     std::stack<std::pair<int, int>> stack; // Stos przechowuj¹cy wspó³rzêdne komórek do odwiedzenia
 
@@ -32,7 +35,7 @@ void Maze::generateDFS(int x, int y) {
 
         // Tworzymy listê kierunków i losowo j¹ mieszamy
         std::vector<int> directions = { 0, 1, 2, 3 };
-        std::random_shuffle(directions.begin(), directions.end());
+        std::shuffle(directions.begin(), directions.end(), std::mt19937{ std::random_device{}() });
 
         bool moved = false; // Flaga okreœlaj¹ca, czy wykonano ruch
         bool createExtraBranch = (rand() % 10 < 3); // Okreœlenie, czy utworzyæ dodatkow¹ ga³¹Ÿ
@@ -141,4 +144,64 @@ void Maze::generatePrim() {
 
 const std::vector<std::vector<int>>& Maze::getMaze() const {
     return maze;
+}
+
+int Maze::neighborCount(int x, int y) const {
+    int cnt = 0;
+    const int dx[4] = { 1,-1,0,0 };
+    const int dy[4] = { 0,0,1,-1 };
+    for (int i = 0; i < 4; i++) {
+        int nx = x + dx[i], ny = y + dy[i];
+        if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+            if (maze[ny][nx] == 1) cnt++;
+        }
+    }
+    return cnt;
+}
+
+bool Maze::isDeadEnd(int x, int y) const {
+    if (maze[y][x] != 1) return false;
+    return neighborCount(x, y) == 1;
+}
+
+void Maze::addRandomLoops(float loopChance, int searchRadius) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<float> rnd(0.0f, 1.0f);
+
+    std::vector<std::pair<int, int>> deadends;
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            if (isDeadEnd(x, y)) deadends.emplace_back(x, y);
+        }
+    }
+
+    for (auto [dx0, dy0] : deadends) {
+        if (rnd(gen) > loopChance) continue;
+        int bestx = -1, besty = -1;
+        float bestd = 1e9f;
+        for (int y = std::max(0, dy0 - searchRadius); y <= std::min(height - 1, dy0 + searchRadius); ++y) {
+            for (int x = std::max(0, dx0 - searchRadius); x <= std::min(width - 1, dx0 + searchRadius); ++x) {
+                if (maze[y][x] == 1 && !(x == dx0 && y == dy0) && neighborCount(x, y) > 1) {
+                    float d = float((dx0 - x) * (dx0 - x) + (dy0 - y) * (dy0 - y));
+                    if (d < bestd) {
+                        bestd = d; bestx = x; besty = y;
+                    }
+                }
+            }
+        }
+        if (bestx == -1) continue;
+        // Po³¹czenie prostej linii miêdzy dead-end a junction (Bresenham)
+        int x0 = dx0, y0 = dy0, x1 = bestx, y1 = besty;
+        int dx_line = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+        int dy_line = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+        int err = dx_line + dy_line;
+        while (true) {
+            maze[y0][x0] = 1;
+            if (x0 == x1 && y0 == y1) break;
+            int e2 = 2 * err;
+            if (e2 >= dy_line) { err += dy_line; x0 += sx; }
+            if (e2 <= dx_line) { err += dx_line; y0 += sy; }
+        }
+    }
 }

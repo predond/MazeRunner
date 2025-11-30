@@ -42,9 +42,9 @@ Player::Player(int x, int y, float size)
     }
 
     stepSound.setBuffer(stepSoundBuffer);
-    stepSound.setVolume(5);  // Mo¿esz ustawiæ g³oœnoœæ dŸwiêku
-    stepSound.setLoop(true);   // Ustawienie pêtli, ¿eby dŸwiêk by³ odtwarzany w pêtli
-    stepSound.setPitch(1.9f);  // Przyspieszenie odtwarzania dŸwiêku o 1.5x
+    stepSound.setVolume(5);
+    stepSound.setLoop(true);
+    stepSound.setPitch(1.9f);
 }
 
 void Player::move(const sf::Vector2f& direction, const std::vector<std::vector<int>>& maze) {    

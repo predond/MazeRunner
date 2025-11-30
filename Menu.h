@@ -11,6 +11,6 @@ public:
 
 private:
     sf::Font font;
-    sf::Text menu[4]; // Rozpocznij, Zapisz, Wczytaj, Wyjdź
+    sf::Text menu[5]; // Rozpocznij, Zapisz, Wczytaj, Edytor poziomów, Wyjdź
     int selectedIndex;
 };

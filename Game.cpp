@@ -4,6 +4,7 @@
 #include <thread>
 #include <chrono>
 #include <fstream>
+#include <random>
 
 #define M_PI 3.14159265358979323846
 
@@ -48,7 +49,8 @@ Game::Game(int mazeWidth, int mazeHeight)
         std::cerr << "Nie udało się załadować tekstury dla śladów!" << std::endl;
         // Obsługa błędów
     }
-    
+
+
     // Wczytaj muzykę
     if (!backgroundMusic.openFromFile("assets/back_music.mp3")) {
         throw std::runtime_error("Nie udało się wczytać muzyki!");
@@ -65,7 +67,6 @@ Game::Game(int mazeWidth, int mazeHeight)
     wallSprite.setTexture(wallTexture);
     pathSprite.setTexture(pathTexture);
     trailSprite.setTexture(trailTexture);
-    
     wallSprite.setScale(cellSize / wallTexture.getSize().x, cellSize / wallTexture.getSize().y);
     pathSprite.setScale(cellSize / pathTexture.getSize().x, cellSize / pathTexture.getSize().y);
     trailSprite.setScale(cellSize / trailTexture.getSize().x * 0.8, cellSize / trailTexture.getSize().y * 0.8);
@@ -196,9 +197,9 @@ void Game::processInput() {
                 if (isAStarActive) {
                     sf::Vector2f pozycjaGracza = player.getPosition();
                     solver.reset();
-                    sciezkaLabiryntu = solver.znajdzSciezkeAStar(maze.getMaze(), pozycjaGracza, exitPosition);
+                    sciezkaLabiryntu = solver.znajdzSciezkeAStar(maze.getMaze(), pozycjaGracza, maze.door->getPosition() / cell.getSize().x);
                     if (sciezkaLabiryntu.empty()) {
-                        std::cout << "Nie znaleziono ścieżki!" << std::endl;
+                        std::cout << "Nie znaleziono sciezki!" << std::endl;
                         isAStarActive = false;
                     }
                 }
@@ -223,9 +224,9 @@ void Game::processInput() {
         if (!exiting)
             player.move(direction, maze.getMaze());
         
-        /*if (!isAStarActive)
+        if (!isAStarActive)
             DrawStepTrail(direction);
-        */
+        
         // Logowanie współrzędnych co sekundę
         if (logClock.getElapsedTime().asSeconds() >= 1.0f) {
             sf::Vector2f playerPos = player.getPosition();
@@ -288,6 +289,14 @@ void Game::update() {
             DrawStepTrail(direction);
 
             player.move(direction, maze.getMaze());
+        }
+    }
+
+    int grabbedKey = checkKeyCollection();
+    if (grabbedKey) {
+        if (!exiting) {
+            maze.door->unlock();
+            maze.key->collect();
         }
     }
 
@@ -358,7 +367,7 @@ void Game::render() {
         sf::RectangleShape metaArea;
         metaArea.setSize(cell.getSize());
         metaArea.setFillColor(sf::Color(0, 255, 0, 100)); // Przezroczysty zielony
-        metaArea.setPosition(exitPosition.x * cell.getSize().x, exitPosition.y * cell.getSize().y);
+        metaArea.setPosition(maze.door->pos.x * cell.getSize().x, maze.door->pos.y * cell.getSize().y);
         
         // Iteruj po odwiedzonych komórkach i rysuj ślad
         for (auto it = trailMarks.begin(); it != trailMarks.end();) {
@@ -397,18 +406,21 @@ void Game::render() {
             }
         }
         
-        // Rysowanie gracza
-        player.draw(window);
-        
         if (exiting && !player.isTeleporting) {
             exiting = false;
             updateDifficulty();
         }
 
-        window.draw(metaArea);
+        //window.draw(metaArea);
+        maze.door->draw(window);
+        if (!maze.key->isCollected())
+            maze.key->draw(window);
+
+        // Rysowanie gracza
+        player.draw(window);
         
         // Rysowanie mgły
-        //generateFog();
+        generateFog();
         
         // Rysowanie menu
         window.draw(menuBar);
@@ -420,16 +432,31 @@ void Game::render() {
     window.display();
 }
 
+bool Game::checkKeyCollection() {
+    sf::Vector2f playerPosition = player.getPosition();
+
+    // Obliczenie obszaru klucza
+    float keyX = maze.key->getPosition().x / cell.getSize().x;
+    float keyY = maze.key->getPosition().y / cell.getSize().y;
+    
+    // Sprawdzenie warunków
+    int px = static_cast<int>(playerPosition.x);
+    int py = static_cast<int>(playerPosition.y);
+    int kx = static_cast<int>(maze.key->getPosition().x / cell.getSize().x);
+    int ky = static_cast<int>(maze.key->getPosition().y / cell.getSize().y);
+    return px == kx && py == ky;
+}
+
 bool Game::checkWinCondition() {
     sf::Vector2f playerPosition = player.getPosition();
 
     // Obliczenie obszaru mety
-    float metaX = exitPosition.x;
-    float metaY = exitPosition.y;
+    float metaX = maze.door->getPosition().x / cell.getSize().x;
+    float metaY = maze.door->getPosition().y / cell.getSize().y;
 
     // Sprawdzenie warunków
-    return (playerPosition.x >= metaX && playerPosition.x <= metaX + 1 &&
-        playerPosition.y >= metaY && playerPosition.y  <= metaY + 1);
+    return (!maze.door->isLocked() && (playerPosition.x >= metaX && playerPosition.x <= metaX + 1 &&
+        playerPosition.y >= metaY && playerPosition.y <= metaY + 1));
 }
 
 void Game::generateFog()
@@ -456,7 +483,10 @@ void Game::prepareLevel(int mazeWidth, int mazeHeight)
 {
     maze = Maze(mazeWidth, mazeHeight);
     maze.generate();
-    
+
+    // Dodaj losowe pętle (ok. 10-20%) aby zmniejszyć ilość ślepych zaułków
+    maze.addRandomLoops(0.15f, 6);
+        
     // Ustaw rozmiar jednej komórki
     cell.setSize({ res.width / mazeWidth, (res.height) / mazeHeight });
     player.updateCellSize(cell.getSize().x);   // Aktualizacja rozmiaru gracza
@@ -484,9 +514,17 @@ exitLoop:
     // Znajdź wyjście w 4 ćwiartce labiryntu
     std::vector<std::pair<int, int>> farCells;
     for (size_t y = mazeGrid.size() - 1; y > mazeGrid.size() / 2; --y) {
+        for (size_t x = 0; x < mazeGrid[y].size() / 2; ++x) {
+            if (mazeGrid[y][x] == 1) {
+                maze.key = new Key({ static_cast<float>(x) * cell.getSize().x, static_cast<float>(y) * cell.getSize().y }, cell.getSize().x, res.width / mazeWidth);
+                goto foundKey;
+            }
+        }
+foundKey:
         for (size_t x = mazeGrid[y].size() - 1; x > mazeGrid[y].size() / 2; --x) {
             if (mazeGrid[y][x] == 1) {
-                exitPosition = { static_cast<float>(x), static_cast<float>(y) };
+                //exitPosition = { static_cast<float>(x), static_cast<float>(y) };
+                maze.door = new Door({ static_cast<float>(x) * cell.getSize().x, static_cast<float>(y) * cell.getSize().y }, cell.getSize());
                 goto foundExit;  // Przerywa pętlę po znalezieniu pierwszej komórki
             }
         }
@@ -495,7 +533,8 @@ foundExit:
 
     if (!farCells.empty()) {
         auto exitCell = farCells[rand() % farCells.size()];
-        exitPosition = { static_cast<float>(exitCell.first), static_cast<float>(exitCell.second) };
+        //exitPosition = { static_cast<float>(exitCell.first), static_cast<float>(exitCell.second) };
+        maze.door->setProps({ static_cast<float>(exitCell.first), static_cast<float>(exitCell.second) }, cell.getSize());
     }
     
     visitedCells.clear();
